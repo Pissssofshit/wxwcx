@@ -1,15 +1,21 @@
 // pages/firendsCirle/firendsCircle.js
+const AV = require('../../libs/av-weapp-min.js');
+const moment = require('../../utils/moment.js');
 const app = getApp()  //获取小程序实例
 function getAllData(self){
-    wx.request({
-        url: app.globalData.baseUrl + "api",
-        method: "GET",
-        success(res) {
-            self.setData({
-                deliverData: res.data.result
-            })
-        }
-    })
+  var query = new AV.Query('Article');
+    query.descending('createdAt');
+    query.find().then(function (values) {
+      var tempArticles = []
+      values.forEach(function (value) {
+        value.createdAt = moment(value.createdAt).format('YYYY年MM月DD日 HH:mm:ss')
+        value.attributes.voiceDuration = moment(value.attributes.voiceDuration).format('mm:ss')
+        tempArticles.push(value.toJSON())
+      })
+      self.setData({
+        deliverData: tempArticles
+      })
+  })
 }
 Page({
 
@@ -57,8 +63,10 @@ Page({
     },
     //点击评论图标,显示点赞和评论按钮
     showZanAndPinglun(e){
+      //  console.log(e);
+        console.log(this.data.deliverData)
         this.setData({
-            showZanAndPinglunNum: e.currentTarget.dataset.idx
+            showZanAndPinglunNum: this.data.deliverData[e.currentTarget.dataset.idx].objectId
         })
     },
     //点选和评论的隐藏通过事件委托到全页面(暂时只实现当条朋友所在区域,全页面和滚动时也隐藏在考虑实现)

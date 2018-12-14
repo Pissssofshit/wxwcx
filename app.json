@@ -7,7 +7,7 @@
     "pages/detail/detail",
     "pages/profile/profile",
     "pages/comment/comment",
-    "pages/write/write"
+    "pages/friendsCirle/friendsCircle"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -22,6 +22,12 @@
       {
         "pagePath": "pages/home/home",
         "text": "广场",
+        "iconPath": "images/home_disable.png",
+        "selectedIconPath": "images/home.png"
+      },
+      {
+        "pagePath": "pages/friendsCirle/friendsCircle",
+        "text": "广场1",
         "iconPath": "images/home_disable.png",
         "selectedIconPath": "images/home.png"
       },

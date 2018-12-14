@@ -70,7 +70,6 @@ Page({
     query.descending('createdAt');
     query.find().then(function (values) {
       wx.stopPullDownRefresh();
-      console.log(values)
       var tempArticles = []
       values.forEach(function (value) {
         value.createdAt = moment(value.createdAt).format('YYYY年MM月DD日 HH:mm:ss')
@@ -82,7 +81,7 @@ Page({
         articles: tempArticles,
       })
 
-      console.log(that.data.articles)
+      // console.log(that.data.articles)
     }, function (error) {
       wx.stopPullDownRefresh();
       console.error(error)

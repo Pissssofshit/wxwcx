@@ -8,20 +8,26 @@
     <button type='primary' size='default' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="tapBtnToGetUserInfo"> 授权获取头像和昵称 </button>
     <block wx:else>
         <view class='single' wx:for="{{deliverData}}" wx:key="{{index}}">
-           <image class="avatar" src="{{item.avatarUrl}}" mode="cover"></image>
+           <image class="avatar" src="{{item.userAvatar}}" mode="cover"></image>
+           <!-- <image class="avatar" src="{{item.avatarUrl}}" mode="cover"></image> -->
             <view class='main'>
-                <view class='nickname'>{{item.nickName}}</view>
+                <view class='nickname'>{{item.userName}}</view>
                 <view wx:if="{{item.textareaTxt != 'null'}}">
                     <view class='main-comtent' style='{{isShowOrHideComtent ? "" : "max-height: 60pt"}}'>
-                    {{item.textareaTxt}}
+                    {{item.text}}
                     </view>
                     <text class='comtent-showOrHide' catchtap='ShowOrHideComtent'>{{allOrPart}}</text>
                 </view>
-                <view class='imgArea' wx:if="{{!item.imgArea}}" bindtap='showImg' data-Outidx="{{index}}">
+                <!-- <view class='imgArea' wx:if="{{!item.imgArea}}" bindtap='showImg' data-Outidx="{{index}}">
                      <view wx:for="{{item.imgArr}}" wx:key="{{index}}">
                         <image src="{{item}}" mode='aspectFill' data-imgidx="{{index}}" />
                     </view>
-                </view>
+                </view> -->
+                <!-- <view class='imgArea' wx:if="{{!item.imgArea}}" bindtap='showImg' data-Outidx="{{index}}">
+                     <view wx:for="{{item.imgArr}}" wx:key="{{index}}">
+                        <image src="{{item}}" mode='aspectFill' data-imgidx="{{index}}" />
+                    </view>
+                </view> -->
                 <view class='location' wx:if="{{item.location != 'null'}}">
                     <text class='iconfont icon-zuobiaonormal'></text>
                     <text>{{item.location}}</text>
@@ -29,7 +35,7 @@
                 <view class='timeArea'>
                     <text>{{item.time}}</text>
                     <view class='timeArea-right'>
-                        <view class='zan-pinglun' wx:if="{{showZanAndPinglunNum == item.id}}">
+                        <view class='zan-pinglun' wx:if="{{showZanAndPinglunNum == item.objectId}}">
                             <text class='iconfont icon-xin' data-idx="{{index}}" catchtap='dianzan'> 赞</text>
                             <text class='iconfont icon-pinglun'> 评论</text>
                         </view>
